@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putadd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 09:28:29 by dtome-pe          #+#    #+#             */
+/*   Updated: 2023/05/16 14:02:19 by dtome-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <unistd.h>
 
-size_t ft_putadd(void *ptr)
+size_t	ft_putadd(void *ptr)
 {
-	size_t len;
-	unsigned char *p;
-	unsigned char b;
-	char string[] = "0123456789ABCDEF";
-	size_t i;
+	const char *hex;
+	unsigned long address;
+	char buffer[sizeof(void*) * 2 + 3];
+	size_t count;
+	int index;
 
-	i = 0;
-	len = 0;
-	p = (unsigned char *) ptr;
-	ft_putstr("0x");
-	while (i < sizeof (ptr))
+	index = sizeof(void*) * 2 + 2;
+	buffer[index] = '\0';
+	address = (unsigned long) ptr;
+
+    while (index > 1) 
 	{	
-		b = *(p + i);
-		ft_putchar("0123456789ABCDEF"[b >> 4]);
-        ft_putchar("0123456789ABCDEF"[b & 0x0F]);
-		i++;
-        len += 2;
-	}
-	printf("address is %p\n", ptr);
-	return (len + 2);
-}
+		index--;
+        buffer[index] = "0123456789ABCDEF"[address & 0xF];
+        address >>= 4;
+    }
+    buffer[0] = 'x';
+    buffer[1] = '0';
+	count = ft_putstr(buffer);
+	return (count)
+;}

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 09:23:33 by dtome-pe          #+#    #+#             */
+/*   Updated: 2023/05/16 09:25:58 by dtome-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdio.h>
 #include <stdarg.h>
 
-size_t check_conversions(va_list args, char const *str)
+size_t	check_conversions(va_list args, char const *str)
 {	
 	++str;
 	while (*str)
@@ -20,9 +32,9 @@ size_t check_conversions(va_list args, char const *str)
 		else if (*str == 'u')
 			return (ft_putunbr(va_arg(args, unsigned int)));
 		else if (*str == 'x')
-			return (ft_puthexnbr(va_arg(args, unsigned int), "0123456789abcdef"));
+			return (ft_puthex(va_arg(args, unsigned int), "0123456789abcdef"));
 		else if (*str == 'X')
-			return (ft_puthexnbr(va_arg(args, unsigned int), "0123456789ABCDEF"));
+			return (ft_puthex(va_arg(args, unsigned int), "0123456789ABCDEF"));
 		else if (*str == '%')
 			return (ft_putchar(va_arg(args, int)));
 		else
@@ -31,12 +43,12 @@ size_t check_conversions(va_list args, char const *str)
 	return (0);
 }
 
-int ft_printf(char const *str, ...)
+int	ft_printf(char const *str, ...)
 {	
-	size_t n;
+	size_t	n;
+	va_list	args;
 
 	n = 0;
-	va_list args;
 	if (!str)
 		return (0);
 	va_start(args, str);
@@ -51,10 +63,9 @@ int ft_printf(char const *str, ...)
 		{
 			ft_putchar(*str);
 			n++;
-		} 
+		}
 		str++;
 	}
 	va_end(args);
 	return (n);
 }
-
