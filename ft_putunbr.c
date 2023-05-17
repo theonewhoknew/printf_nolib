@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 09:27:07 by dtome-pe          #+#    #+#             */
+/*   Updated: 2023/05/16 09:27:30 by dtome-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 #include "ft_printf.h"
@@ -19,10 +31,15 @@ static size_t ft_num_len(unsigned long number)
 size_t	ft_putunbr(unsigned int n)
 {
 	unsigned long	number;
+<<<<<<< HEAD
 	size_t	count;
 	size_t	len;
 	char *str;
 	
+=======
+	size_t			count;
+
+>>>>>>> 08eadd20ab50f3dcacbfd947d7a1e3f9d2cabc86
 	count = 0;
 	number = (unsigned long) n;
 	len = ft_num_len(number);
