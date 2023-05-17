@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: theonewhoknew <theonewhoknew@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 09:23:33 by dtome-pe          #+#    #+#             */
-/*   Updated: 2023/05/16 09:25:58 by dtome-pe         ###   ########.fr       */
+/*   Updated: 2023/05/17 11:13:47 by theonewhokn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ size_t	check_conversions(va_list args, char const *str)
 		else if (*str == 'u')
 			return (ft_putunbr(va_arg(args, unsigned int)));
 		else if (*str == 'x')
-			return (ft_puthex(va_arg(args, unsigned int), "0123456789abcdef"));
+			return (ft_puthexnbr(va_arg(args, unsigned int), "0123456789abcdef"));
 		else if (*str == 'X')
-			return (ft_puthex(va_arg(args, unsigned int), "0123456789ABCDEF"));
+			return (ft_puthexnbr(va_arg(args, unsigned int), "0123456789ABCDEF"));
 		else if (*str == '%')
 			return (ft_putchar('%'));
 		else
