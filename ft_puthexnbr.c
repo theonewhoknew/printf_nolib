@@ -22,7 +22,6 @@ size_t	ft_puthexnbr(unsigned int n, char *base)
 	size_t len;
 	char *str;
 
-
 	count = 0;
 	number = (unsigned long ) n;
 	len = ft_num_len(number);
