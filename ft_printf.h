@@ -8,9 +8,9 @@ int ft_printf(char const *str, ...);
 size_t	ft_strlen(const char *s);
 size_t ft_putadd(void *ptr);
 size_t	ft_putchar(char c);
-size_t	ft_puthexnbr(int n, char *base);
+size_t	ft_puthexnbr(unsigned int n, char *base);
 size_t	ft_putnbr(int n);
 size_t	ft_putstr(char *s);
-size_t	ft_putunbr(int n);
+size_t	ft_putunbr(unsigned int n);
 
 #endif

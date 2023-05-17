@@ -1,22 +1,43 @@
 #include "ft_printf.h"
 
-size_t	ft_putunbr(int n)
+#include "ft_printf.h"
+#include <stdlib.h>
+
+static size_t ft_num_len(unsigned long number)
+{	
+	size_t len;
+
+	len = 1;
+	while (number / 10)
+	{
+		number /= 10;
+		len++;
+	}
+	return (len);
+}
+
+size_t	ft_putunbr(unsigned int n)
 {
 	unsigned long	number;
 	size_t	count;
+	size_t	len;
+	char *str;
 	
 	count = 0;
-	number = 0;
 	number = (unsigned long) n;
-	if (number > 9)
+	len = ft_num_len(number);
+	str = (char *)malloc(sizeof (char) * (len + 1));
+	str[len] = '\0';
+	if (number == 0)
+		str[len - 1] = '0';
+	while (number > 0)
 	{
-		ft_putnbr(number / 10);
-		ft_putnbr(number % 10);
+		str[len - 1] = number % 10 + '0';
+		number /= 10;
+		len--;
 	}
-	if (number <= 9)
-	{
-		ft_putchar(number + '0');
-		count++;
-	}
+	count = ft_putstr(str);
+	free (str);
+	str = NULL;
 	return (count);
 }

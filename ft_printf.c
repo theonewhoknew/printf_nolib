@@ -24,7 +24,7 @@ size_t check_conversions(va_list args, char const *str)
 		else if (*str == 'X')
 			return (ft_puthexnbr(va_arg(args, unsigned int), "0123456789ABCDEF"));
 		else if (*str == '%')
-			return (ft_putchar(va_arg(args, int)));
+			return (ft_putchar('%'));
 		else
 			return (-1);
 	}	

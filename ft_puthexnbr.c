@@ -1,30 +1,43 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-size_t	ft_puthexnbr(int n, char *base)
+static size_t ft_num_len(unsigned long number)
+{	
+	size_t len;
+
+	len = 1;
+	while (number / 16)
+	{
+		number /= 16;
+		len++;
+	}
+	return (len);
+}
+
+size_t	ft_puthexnbr(unsigned int n, char *base)
 {
-	long	number;
+	unsigned long	number;
 	size_t	count;	
-	size_t len_base;
+	size_t len;
+	char *str;
 
-	len_base = ft_strlen(base);
+
 	count = 0;
-	number = 0;
-	number = n;;
-	if (number < 0)
+	number = (unsigned long ) n;
+	len = ft_num_len(number);
+	str = (char *)malloc(sizeof (char) * (len + 1));
+	str[len] = '\0';
+	if (number == 0)
+		str[len - 1] = '0';
+	while (number > 0)
 	{
-		number *= -1;
-		ft_putchar('-');
+		str[len - 1] = base[number % 16];
+		number /= 16;
+		len--;
 	}
-	if (number >= (long) len_base)
-	{
-		ft_puthexnbr(number / len_base, base);
-		ft_puthexnbr(number % len_base, base);
-	}
-	if (number < (long) len_base)
-	{	
-		ft_putchar(base[number]);
-		count++;
-	}
+	count = ft_putstr(str);
+	free (str);
+	str = NULL;
 	return (count);
 }
