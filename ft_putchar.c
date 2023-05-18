@@ -6,10 +6,11 @@
 /*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 09:54:31 by dtome-pe          #+#    #+#             */
-/*   Updated: 2023/05/16 09:28:17 by dtome-pe         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:17:43 by dtome-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include <unistd.h>
 
 size_t	ft_putchar(char c)
@@ -17,7 +18,8 @@ size_t	ft_putchar(char c)
 	size_t	n;
 
 	n = 0;
-	write(1, &c, 1);
+	if (write(1, &c, 1) == -1)
+		return (-1);
 	n++;
 	return (n);
 }

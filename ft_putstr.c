@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theonewhoknew <theonewhoknew@student.42    +#+  +:+       +#+        */
+/*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 09:52:53 by dtome-pe          #+#    #+#             */
-/*   Updated: 2023/05/17 09:38:53 by theonewhokn      ###   ########.fr       */
+/*   Updated: 2023/05/18 10:16:59 by dtome-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ size_t	ft_putstr(char *s)
 		return (ft_putstr("(null)"));
 	while (s[i])
 	{
-		ft_putchar(s[i]);
+		if ((int) ft_putchar(s[i]) == -1)
+			return (-1);
 		i++;
 	}
 	return (i);

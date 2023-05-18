@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theonewhoknew <theonewhoknew@student.42    +#+  +:+       +#+        */
+/*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 09:28:29 by dtome-pe          #+#    #+#             */
-/*   Updated: 2023/05/17 11:10:44 by theonewhokn      ###   ########.fr       */
+/*   Updated: 2023/05/18 10:16:52 by dtome-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static size_t ft_add_len(unsigned long temp, size_t len)
+static size_t	ft_add_len(unsigned long temp, size_t len)
 {
 	while (temp > 15)
 	{
@@ -24,8 +24,10 @@ static size_t ft_add_len(unsigned long temp, size_t len)
 	return (len + 1);
 }
 
-static char* ft_create_arr(char *str, unsigned long temp, unsigned long n, int i)
+static char	*ft_create_arr(char *str,
+		unsigned long temp, unsigned long n, int i)
 {
+	str[i + 1] = '\0';
 	while (i >= 0)
 	{
 		temp = n % 16;
@@ -39,30 +41,38 @@ static char* ft_create_arr(char *str, unsigned long temp, unsigned long n, int i
 	return (str);
 }
 
-size_t ft_putadd(void *ptr)
+static char	*ft_free(char *str)
 {
-	size_t len;
-	unsigned long  n;
-	unsigned long  temp;
-	int i;
-	char *str;
-	
+	free (str);
+	str = NULL;
+	return (NULL);
+}
+
+size_t	ft_putadd(void *ptr)
+{
+	size_t			len;
+	unsigned long	n;
+	unsigned long	temp;
+	char			*str;
+
 	len = 0;
 	str = NULL;
 	if (!ptr)
-		return (ft_putstr("(nil)"));
+		return (ft_putstr("0x0"));
 	n = (unsigned long int) ptr;
 	temp = n;
 	len = ft_add_len(temp, len);
-	i = len - 1;
 	str = (char *)malloc(sizeof (char) * (len + 1));
 	if (!str)
-		return (0);
-	str[len] = '\0';
-	str = ft_create_arr(str, temp, n, i);
+		return (-1);
+	str = ft_create_arr(str, temp, n, len - 1);
 	n = ft_putstr("0x");
+	if ((int) n == -1)
+	{	
+		str = ft_free(str);
+		return (-1);
+	}
 	n += ft_putstr(str);
-	free (str);
-	str = NULL;
+	str = ft_free(str);
 	return (n);
 }

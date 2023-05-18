@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theonewhoknew <theonewhoknew@student.42    +#+  +:+       +#+        */
+/*   By: dtome-pe <dtome-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 09:55:57 by dtome-pe          #+#    #+#             */
-/*   Updated: 2023/05/17 11:10:45 by theonewhokn      ###   ########.fr       */
+/*   Updated: 2023/05/18 08:47:11 by dtome-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdlib.h>
 
-static size_t ft_num_len(long number)
+static size_t	ft_num_len(long number)
 {	
-	size_t len;
+	size_t	len;
 
 	len = 1;
 	if (number < 0)
@@ -31,16 +31,29 @@ static size_t ft_num_len(long number)
 	return (len);
 }
 
+static	char	*ft_create_string(long int number, char *str, size_t len)
+{
+	while (number > 0)
+	{
+		str[len - 1] = number % 10 + '0';
+		number /= 10;
+		len--;
+	}
+	return (str);
+}
+
 size_t	ft_putnbr(int n)
 {
 	long	number;
 	size_t	count;
 	size_t	len;
-	char *str;
+	char	*str;
 
 	number = (long) n;
 	len = ft_num_len(number);
 	str = (char *)malloc(sizeof (char) * (len + 1));
+	if (!str)
+		return (-1);
 	str[len] = '\0';
 	if (number < 0)
 	{
@@ -49,12 +62,7 @@ size_t	ft_putnbr(int n)
 	}
 	if (number == 0)
 		str[len - 1] = '0';
-	while (number > 0)
-	{
-		str[len - 1] = number % 10 + '0';
-		number /= 10;
-		len--;
-	}
+	str = ft_create_string(number, str, len);
 	count = ft_putstr(str);
 	free (str);
 	str = NULL;
